@@ -4,6 +4,26 @@ import requests
 import os
 from aiogram import Bot, Dispatcher, types
 from aiogram.filters import Command
+from dotenv import load_dotenv
+
+
+# Завантажуємо змінні з .env
+load_dotenv()
+
+# Телеграм токен
+TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
+# OpenSanctions API ключ
+API_KEY = os.getenv("OPENSANCTIONS_API_KEY")
+# РНБО API URL
+# RNBO_API_URL = "https://api-drs.nsdc.gov.ua/sanctions-registry/subjects"
+
+# Перевірка, чи всі змінні завантажилися
+if not TOKEN or not API_KEY:
+    raise ValueError("Не знайдено необхідні API-ключі у .env файлі!")
+
+# Ініціалізація бота та диспетчера
+bot = Bot(token=TOKEN)
+dp = Dispatcher()
 
 # Телеграм токен
 TOKEN = "8045856936:AAGUsvT_VBd-aj8P_g49qo2jsXliuXUbR5w"
