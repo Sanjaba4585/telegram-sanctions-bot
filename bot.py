@@ -43,6 +43,8 @@ dp = Dispatcher()
 # Функція для перевірки санкційного списку через OpenSanctions API та РНБО
 async def check_sanctions(name):
     session = requests.Session()
+   
+    print(f"Зчитаний API-ключ: {API_KEY}")
     session.headers['Authorization'] = f'ApiKey {API_KEY}'
     session.headers['Content-Type'] = 'application/json'
     
