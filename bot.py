@@ -5,6 +5,8 @@ import os
 from aiogram import Bot, Dispatcher, types
 from aiogram.filters import Command
 from dotenv import load_dotenv
+from aiohttp import web
+
 
 
 # Завантажуємо змінні з .env
@@ -32,6 +34,8 @@ TOKEN = "8045856936:AAGUsvT_VBd-aj8P_g49qo2jsXliuXUbR5w"
 API_KEY = "ee37de2e10cbcfe69c8a659caf465891"
 API_URL = "https://api.opensanctions.org"
 RNBO_API_URL = "https://api-drs.nsdc.gov.ua/sanctions-registry/subjects"
+
+
 
 # Налаштування логування
 logging.basicConfig(level=logging.INFO)
@@ -114,6 +118,23 @@ async def handle_name(message: types.Message):
         await message.answer_document(types.FSInputFile(file_path), caption="📄 Повний список збігів")
     else:
         await message.answer(result)
+
+#  Простий веб-сервер для задоволення вимог Render Web Service
+async def handle(request):
+    return web.Response(text="Bot is running.")
+
+async def run_web_server():
+    app = web.Application()
+    app.router.add_get("/", handle)
+    port = int(os.environ.get("PORT", 8000))
+    runner = web.AppRunner(app)
+    await runner.setup()
+    site = web.TCPSite(runner, "0.0.0.0", port)
+    await site.start()
+    logging.info(f"Web server started on port {port}")
+    # Залишаємо сервер працювати без завершення
+    while True:
+        await asyncio.sleep(3600)
 
 # Основна функція для запуску бота
 async def main():
