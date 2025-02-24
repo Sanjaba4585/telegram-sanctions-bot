@@ -31,7 +31,7 @@ TOKEN = "8045856936:AAGUsvT_VBd-aj8P_g49qo2jsXliuXUbR5w"
 # OpenSanctions API ключ (беремо з середовищних змінних для безпеки)
 API_KEY = "ee37de2e10cbcfe69c8a659caf465891"
 API_URL = "https://api.opensanctions.org"
-# RNBO_API_URL = "https://api-drs.nsdc.gov.ua/sanctions-registry/subjects"
+RNBO_API_URL = "https://api-drs.nsdc.gov.ua/sanctions-registry/subjects"
 
 # Налаштування логування
 logging.basicConfig(level=logging.INFO)
